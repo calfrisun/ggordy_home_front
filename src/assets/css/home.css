@@ -1,0 +1,8 @@
+.home .title {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 50px;
+  font-family: "Ownglyph_jiwoosonang";
+  padding: 1rem;
+}/*# sourceMappingURL=home.css.map */
