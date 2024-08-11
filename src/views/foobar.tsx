@@ -1,7 +1,7 @@
-import { Component } from 'solid-js';
+import {Component} from 'solid-js';
 
 const Foobar: Component = () => {
-  return <h1>Foobar</h1>
+  return <h1>Foobar</h1>;
 };
 
 export default Foobar;

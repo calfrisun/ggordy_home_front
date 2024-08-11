@@ -1,7 +1,4 @@
-
-
-
-const ImageFrame = (props:any) => {
+const ImageFrame = (props: any) => {
   return <img src={props.src} alt="" />;
 };
 

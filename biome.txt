@@ -10,7 +10,7 @@
     "enabled": false
   },
   "linter": {
-    "enabled": false,
+    "enabled": true,
     "rules": {
       "recommended": false,
       "a11y": {
@@ -105,14 +105,13 @@
     "formatWithErrors": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 80,
     "lineEnding": "lf",
-    "attributePosition": "auto",
-    "ignore": ["**/dist", "**/node_modules", "**/build"]
+    "ignore": ["tests/**/*.json"]
   },
   "javascript": {
     "formatter": {
-      "enabled": true,
+      "enabled": false,
+      "lineWidth": 90,
       "quoteStyle": "single",
       "jsxQuoteStyle": "double",
       "quoteProperties": "asNeeded",
@@ -131,5 +130,57 @@
       "allowComments": true,
       "allowTrailingCommas": true
     }
-  }
+  },
+  "overrides": [
+    {
+      "include": [
+        "api-docs/*.ts",
+        "build-utils/*.ts",
+        "config/*.ts",
+        "scripts",
+        "tests/js/sentry-test/loadFixtures.ts",
+        "tests/js/jest-pegjs-transform.js",
+        "tests/js/setup.ts",
+        "tests/js/test-balancer/index.js",
+        "*.config.ts"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noNodejsModules": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": ["src/sentry/templates/sentry/error-page-embed.js"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noVar": "off"
+          }
+        }
+      }
+    },
+    {
+      "include": [
+        "static/app/utils/replays/types.tsx",
+        "static/app/utils/queryClient.tsx",
+        "static/app/views/performance/traceDetails/styles.tsx",
+        "static/app/icons/index.tsx",
+        "static/app/components/tabs/index.tsx",
+        "static/app/components/sparklines/line.tsx",
+        "static/app/types/index.tsx",
+        "tests/js/sentry-test/reactTestingLibrary.tsx",
+        "tests/js/sentry-test/index.tsx"
+      ],
+      "linter": {
+        "rules": {
+          "performance": {
+            "noBarrelFile": "off"
+          }
+        }
+      }
+    }
+  ]
 }
