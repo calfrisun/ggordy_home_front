@@ -3,6 +3,8 @@ body::-webkit-scrollbar {
     display: none; /* 스크롤바 숨기기 */
 }
 .home {
+    max-width: 768px;
+    margin: 0 auto;
     .masonry-container {
         display: flex;
         margin-left: 10px;

@@ -16,6 +16,17 @@ const Home: Component = () => {
     {src: './assets/images/gg007.webp', alt: '꼬디'},
     {src: './assets/images/gg008.webp', alt: '꼬디'},
     {src: './assets/images/gg009.webp', alt: '꼬디'},
+    {src: './assets/images/gg010.webp', alt: '꼬디'},
+    {src: './assets/images/gg011.webp', alt: '꼬디'},
+    {src: './assets/images/gg012.webp', alt: '꼬디'},
+    {src: './assets/images/gg013.webp', alt: '꼬디'},
+    {src: './assets/images/gg014.webp', alt: '꼬디'},
+    {src: './assets/images/gg015.webp', alt: '꼬디'},
+    {src: './assets/images/gg016.webp', alt: '꼬디'},
+    {src: './assets/images/gg017.webp', alt: '꼬디'},
+    {src: './assets/images/gg018.webp', alt: '꼬디'},
+    {src: './assets/images/gg019.webp', alt: '꼬디'},
+    {src: './assets/images/gg020.webp', alt: '꼬디'},
   ];
 
   let container!: HTMLDivElement;
@@ -30,7 +41,7 @@ const Home: Component = () => {
         percentPosition: true,
         gutter: 10,
       });
-    }, 10);
+    }, 50);
   });
 
   return (
