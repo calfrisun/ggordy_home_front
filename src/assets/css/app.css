@@ -1,4 +1,64 @@
+@charset "UTF-8";
 @import "./reset.css";
+html {
+  font-family: "Ownglyph_jiwoosonang";
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.header h1 {
+  font-size: 6rem;
+  font-family: "Ownglyph_jiwoosonang";
+  padding: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .header h1 {
+    font-size: 4rem;
+    padding: 0.5rem;
+  }
+}
+.header > a {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 20px;
+}
+.header > a img {
+  position: inherit;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* 스크롤바 숨기기 */
+}
+
+.home .masonry-container {
+  display: flex;
+  margin-left: 10px;
+  width: 100%;
+}
+.home .masonry-item {
+  margin-bottom: 10px;
+  width: calc(33% - 10px);
+}
+.home .masonry-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -11,11 +71,83 @@
   height: auto;
 }
 
-.home .title {
+.login {
   display: flex;
-  width: 100%;
   justify-content: center;
-  font-size: 50px;
-  font-family: "Ownglyph_jiwoosonang";
-  padding: 1rem;
-}/*# sourceMappingURL=app.css.map */
+  align-items: center;
+  height: calc(100vh - 100px);
+}
+.login form {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+@media screen and (max-width: 375px) {
+  .login form {
+    padding: 15px;
+    margin: 0;
+    box-shadow: none;
+    background-color: transparent;
+  }
+}
+.login form div {
+  margin-bottom: 20px;
+}
+.login form div label {
+  display: block;
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: #333;
+}
+@media screen and (max-width: 375px) {
+  .login form div label {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+}
+.login form div input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.8rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+@media screen and (max-width: 375px) {
+  .login form div input {
+    padding: 10px;
+    font-size: 1.4rem;
+    border-radius: 8px;
+  }
+}
+.login form div input:focus {
+  outline: none;
+  border-color: #666;
+}
+.login form button {
+  width: 100%;
+  padding: 12px;
+  font-size: 2rem;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+@media screen and (max-width: 375px) {
+  .login form button {
+    padding: 10px;
+    font-size: 1.4rem;
+    border-radius: 8px;
+  }
+}
+.login form button:hover {
+  background-color: #444;
+}
+
+/*# sourceMappingURL=app.css.map */

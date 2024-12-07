@@ -7,7 +7,7 @@ export const routes: RouteDefinition[] = [
         component: lazy(() => import("../views/home")),
     },
     {
-        path: "/foobar",
-        component: lazy(() => import("../views/foobar")),
+        path: "/login",
+        component: lazy(() => import("../views/login")),
     },
 ]

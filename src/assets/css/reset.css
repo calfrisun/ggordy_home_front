@@ -57,3 +57,11 @@ table {
   border-spacing: 0;
 }
 
+* {
+  user-select: none;  /* 텍스트 선택 방지 */
+  -webkit-user-drag: none;  /* 이미지 드래그 방지 */
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
