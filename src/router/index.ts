@@ -6,8 +6,16 @@ export const routes: RouteDefinition[] = [
         path: "/",
         component: lazy(() => import("../views/home")),
     },
+    // {
+    //     path: "/login",
+    //     component: lazy(() => import("../views/login")),
+    // },
     {
         path: "/login",
-        component: lazy(() => import("../views/login")),
+        component: lazy(() => import("../views/snsLogin")),
+    },
+    {
+        path: "/auth",
+        component: lazy(() => import("../views/auth")),
     },
 ]

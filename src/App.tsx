@@ -1,9 +1,14 @@
-import type { Component } from 'solid-js';
+import type {Component} from 'solid-js';
 
 import logo from './logo.svg';
 import styles from './App.module.css';
+import {onMount} from 'solid-js';
+import {getFirebaseApp} from './utils/firebase.utils';
 
 const App: Component = () => {
+  onMount(async () => {
+    await getFirebaseApp();
+  });
   return (
     <div class={styles.App}>
       <header class={styles.header}>

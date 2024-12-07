@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "@solidjs/router": "^0.14.1",
+    "firebase": "^11.0.2",
+    "firebaseui": "^6.1.0",
     "masonry-layout": "^4.2.2",
     "solid-js": "^1.8.11"
   }

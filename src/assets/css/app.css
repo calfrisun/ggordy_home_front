@@ -150,4 +150,11 @@ body::-webkit-scrollbar {
   background-color: #444;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 200px);
+}
+
 /*# sourceMappingURL=app.css.map */
