@@ -8,11 +8,15 @@
     margin-bottom: 2rem;
     max-width: 768px;
     margin: 0 auto;
-
     h1 {
         font-size: 6rem;
         font-family: "Ownglyph_jiwoosonang";
         padding: 1rem;
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         @include tablet {
             font-size: 4rem;

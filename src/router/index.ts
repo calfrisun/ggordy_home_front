@@ -18,4 +18,8 @@ export const routes: RouteDefinition[] = [
         path: "/auth",
         component: lazy(() => import("../views/auth")),
     },
+    {
+        path: "/upload",
+        component: lazy(() => import("../views/upload")),
+    },
 ]

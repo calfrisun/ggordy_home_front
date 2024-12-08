@@ -20,6 +20,10 @@ html {
   font-family: "Ownglyph_jiwoosonang";
   padding: 1rem;
 }
+.header h1 a {
+  text-decoration: none;
+  color: inherit;
+}
 @media screen and (max-width: 768px) {
   .header h1 {
     font-size: 4rem;
@@ -162,6 +166,95 @@ body::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   height: calc(100vh - 200px);
+}
+
+.float-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #fff;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.5));
+  border: 1px solid #ccc;
+}
+.float-button > img {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.upload-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.upload-container h2 {
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+.upload-container .upload-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.upload-container .upload-form input[type=file] {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.upload-container .upload-form .error-message {
+  color: #ff0000;
+  font-size: 14px;
+}
+.upload-container .upload-form .preview-container {
+  width: 300px;
+  height: 300px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.upload-container .upload-form .preview-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.upload-container .upload-form button {
+  width: 200px;
+  padding: 12px 24px;
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+.upload-container .upload-form button:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+.upload-container .upload-form button:disabled {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /*# sourceMappingURL=app.css.map */

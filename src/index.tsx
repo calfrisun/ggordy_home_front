@@ -6,6 +6,7 @@ import './index.css';
 // import App from './App';
 import {routes} from './router';
 import Header from './components/Header';
+import FloatButton from './components/floatButton';
 
 const root = document.getElementById('root');
 
@@ -21,6 +22,7 @@ render(() => {
     <>
       <Header />
       <Router>{routes}</Router>
+      {location.pathname === '/' && <FloatButton />}
     </>
   );
 }, root!);
