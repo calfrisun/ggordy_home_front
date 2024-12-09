@@ -17,6 +17,8 @@ const Upload: Component = () => {
   const [selectedFile, setSelectedFile] = createSignal<File | null>(null);
   const [previewUrl, setPreviewUrl] = createSignal<string>('');
   const [error, setError] = createSignal<string>('');
+  const [uploading, setUploading] = createSignal<boolean>(false);
+
   const navigate = useNavigate();
   let userInfo: IUser | null = null;
 
@@ -51,6 +53,13 @@ const Upload: Component = () => {
   };
 
   const handleUpload = () => {
+    if (uploading()) {
+      window.alert('업로드중입니다.');
+      return;
+    }
+    // 업로드중 표시
+    setUploading(true);
+
     if (!selectedFile()) {
       setError('업로드할 이미지를 선택해주세요.');
       return;
@@ -79,6 +88,7 @@ const Upload: Component = () => {
         );
 
         if (!response.ok) {
+          setUploading(false);
           throw new Error('업로드에 실패했습니다.');
         }
 
@@ -93,10 +103,15 @@ const Upload: Component = () => {
             path,
             extension
           );
+        } else {
+          window.alert('회원이 아닙니다.');
+          navigate('/login');
+          return;
         }
       } catch (error) {
         console.error('업로드 중 오류 발생:', error);
         setError('파일 업로드 중 오류가 발생했습니다.');
+        setUploading(false);
       }
     };
 
@@ -159,6 +174,7 @@ const Upload: Component = () => {
         />
 
         {error() && <p class="error-message">{error()}</p>}
+        {uploading() && <p class="uploading-message">업로드중입니다.</p>}
 
         {previewUrl() && (
           <div class="preview-container">

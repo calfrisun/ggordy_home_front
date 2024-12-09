@@ -272,5 +272,9 @@ body::-webkit-scrollbar {
   cursor: not-allowed;
   box-shadow: none;
 }
+.upload-container .upload-form .uploading-message {
+  color: #000000;
+  font-size: 14px;
+}
 
 /*# sourceMappingURL=app.css.map */

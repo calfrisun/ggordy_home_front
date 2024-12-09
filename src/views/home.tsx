@@ -1,4 +1,10 @@
-import {Component, createEffect, createSignal, onMount} from 'solid-js';
+import {
+  Component,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+} from 'solid-js';
 import ImageFrame from '../components/imageFrame';
 import ImageFrameList from '../components/ImageFrameList';
 const imageSrc: string = './assets/images/ggordy.jpg';
@@ -44,26 +50,38 @@ const Home: Component = () => {
     }
   };
 
-  createEffect(() => {
-    cachePlz(imageList()).then(count => {
-      masonry = new Masonry(container, {
-        itemSelector: '.masonry-item',
-        columnWidth: '.masonry-item',
-        percentPosition: true,
-        gutter: 10,
-      });
+  const eventHandler = () => {
+    setMasonryLoaded(true);
+  };
 
-      // @ts-ignore
-      masonry.on('layoutComplete', setMasonryLoaded(true));
-      // @ts-ignore
-      masonry.off('layoutComplete', setMasonryLoaded(true));
-      //@ts-ignore
-      masonry!.layout();
-    });
+  createEffect(() => {
+    // console.log(imageList());
+    if (imageList().length > 0) {
+      cachePlz(imageList()).then(count => {
+        masonry = new Masonry(container, {
+          itemSelector: '.masonry-item',
+          columnWidth: '.masonry-item',
+          percentPosition: true,
+          gutter: 10,
+        });
+        // @ts-ignore
+        masonry.on('layoutComplete', eventHandler);
+
+        //@ts-ignore
+        masonry!.layout();
+      });
+    }
   });
 
   onMount(() => {
     getPostFromDatabase();
+  });
+
+  onCleanup(() => {
+    if (masonry) {
+      // @ts-ignore
+      masonry.off('layoutComplete', eventHandler);
+    }
   });
 
   return (

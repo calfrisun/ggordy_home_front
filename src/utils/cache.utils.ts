@@ -11,7 +11,9 @@ export const cachePlz = (cacheList: Array<Icache>) => {
             cacheList.forEach((cache) => {
                 // console.log('cache.src', cache.key);
                 const i = new Image();
-                i.src = 'https://static.ggordy.site/' + cache.key + '.' + cache.mimeType;
+                const src = 'https://static.ggordy.site/' + cache.key + '.' + cache.mimeType;
+                // console.log(src)
+                i.src = src;
                 i.onload = () => {
                     count++;
                     // console.log('count', count);
@@ -20,6 +22,9 @@ export const cachePlz = (cacheList: Array<Icache>) => {
                         resolve(count);
                     }
                 }
+                // i.onerror = (e) => {
+                //     console.log('error', e);
+                // }
             });
         } catch (error) {
             reject(count);
