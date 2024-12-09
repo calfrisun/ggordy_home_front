@@ -26,4 +26,14 @@ body::-webkit-scrollbar {
         // width: 30%; /* 아이템의 크기 설정 */
         // margin-bottom: 10px;
     }
+
+    .disappear {
+        opacity: 0;
+        height: 0px;
+        @include transition(opacity, 0.3s, ease-in-out);
+    }
+
+    > div {
+        @include transition(opacity, 0.3s, ease-in-out);
+    }
 }

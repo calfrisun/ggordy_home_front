@@ -6,12 +6,14 @@ import Masonry from 'masonry-layout';
 import {get} from 'firebase/database';
 import {getFireDatabase} from '../utils/firebase.utils';
 import {ref} from 'firebase/database';
+import {cachePlz} from '../utils/cache.utils';
 
 const Home: Component = () => {
   const [imageList, setImageList] = createSignal<any[]>([]);
 
   let container!: HTMLDivElement;
   let masonry: Masonry | undefined;
+  const [masonryLoaded, setMasonryLoaded] = createSignal<boolean>(false);
 
   // 데이터베이스에서 포스트 정보 조회 함수
   const getPostFromDatabase = async (limit: number = 20) => {
@@ -42,28 +44,21 @@ const Home: Component = () => {
   };
 
   createEffect(() => {
-    // imageList가 변경될 때마다 실행
-    if (imageList().length > 0 && container) {
-      console.log('createEffect');
-      if (!masonry) {
-        // setTimeout(() => {
-        masonry = new Masonry(container, {
-          itemSelector: '.masonry-item',
-          columnWidth: '.masonry-item',
-          percentPosition: true,
-          gutter: 10,
-        });
-        // }, 100);
-        //@ts-ignore
-        masonry!.layout();
-        console.log('masonry', masonry);
-      } else {
-        //@ts-ignore
-        masonry!.reloadItems();
-        //@ts-ignore
-        masonry!.layout();
-      }
-    }
+    cachePlz(imageList()).then(count => {
+      masonry = new Masonry(container, {
+        itemSelector: '.masonry-item',
+        columnWidth: '.masonry-item',
+        percentPosition: true,
+        gutter: 10,
+      });
+
+      // @ts-ignore
+      masonry.on('layoutComplete', setMasonryLoaded(true));
+      // @ts-ignore
+      masonry.off('layoutComplete', setMasonryLoaded(true));
+      //@ts-ignore
+      masonry!.layout();
+    });
   });
 
   onMount(() => {
@@ -72,19 +67,23 @@ const Home: Component = () => {
 
   return (
     <div class="home">
-      {/* <h1 class="title">Ggordy Gallery</h1> */}
-      <div class="masonry-container" ref={container}>
-        {imageList().length > 0 &&
-          imageList().map(item => (
-            <div class="masonry-item">
-              <img
-                src={
-                  'https://static.ggordy.site/' + item.key + '.' + item.mimeType
-                }
-                alt="꼬디"
-              />
-            </div>
-          ))}
+      <div class={masonryLoaded() ? '' : 'disappear'}>
+        <div class="masonry-container" ref={container}>
+          {imageList().length > 0 &&
+            imageList().map(item => (
+              <div class="masonry-item">
+                <img
+                  src={
+                    'https://static.ggordy.site/' +
+                    item.key +
+                    '.' +
+                    item.mimeType
+                  }
+                  alt="꼬디"
+                />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
