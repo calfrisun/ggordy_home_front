@@ -9,7 +9,7 @@ export const cachePlz = (cacheList: Array<Icache>) => {
     return new Promise((resolve, reject) => {
         try {
             cacheList.forEach((cache) => {
-                console.log('cache.src', cache.key);
+                // console.log('cache.src', cache.key);
                 const i = new Image();
                 i.src = 'https://static.ggordy.site/' + cache.key + '.' + cache.mimeType;
                 i.onload = () => {
