@@ -124,8 +124,9 @@ const Upload: Component = () => {
         uploadTime,
         mimeType,
       });
-
       console.log('데이터베이스 업로드 성공');
+      window.alert('업로드 성공');
+      navigate('/');
     } catch (error) {
       console.error('데이터베이스 업로드 실패:', error);
       setError('데이터베이스 업로드 중 오류가 발생했습니다.');
@@ -133,25 +134,13 @@ const Upload: Component = () => {
   };
 
   onMount(async () => {
-    // const app = await getFirebaseApp();
-    // const auth = getAuth(app);
-
-    // onAuthStateChanged(auth, user => {
-    //   if (!user) {
-    //     navigate('/login');
-    //     return;
-    //   }
-    //   // 로그인된 사용자 정보 가져오기
-    //   console.log(user);
-    //   const {displayName, email, photoURL, uid} = user;
-    //   console.log('로그인된 사용자:', {displayName, email, photoURL, uid});
-    // });
-    const user = await getLoginUser();
-    if (!user) {
-      window.location.replace('/login');
+    const user = localStorage.getItem('USER_INFO');
+    const decodedUser = atob(user as string);
+    const juser = decodeURIComponent(decodedUser);
+    if (!juser && typeof juser !== 'string') {
+      navigate('/login');
     }
-    userInfo = user;
-    console.log(user);
+    userInfo = JSON.parse(juser);
   });
 
   return (

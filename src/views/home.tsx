@@ -44,15 +44,19 @@ const Home: Component = () => {
   createEffect(() => {
     // imageList가 변경될 때마다 실행
     if (imageList().length > 0 && container) {
+      console.log('createEffect');
       if (!masonry) {
-        setTimeout(() => {
-          masonry = new Masonry(container, {
-            itemSelector: '.masonry-item',
-            columnWidth: '.masonry-item',
-            percentPosition: true,
-            gutter: 10,
-          });
-        }, 100);
+        // setTimeout(() => {
+        masonry = new Masonry(container, {
+          itemSelector: '.masonry-item',
+          columnWidth: '.masonry-item',
+          percentPosition: true,
+          gutter: 10,
+        });
+        // }, 100);
+        //@ts-ignore
+        masonry!.layout();
+        console.log('masonry', masonry);
       } else {
         //@ts-ignore
         masonry!.reloadItems();
