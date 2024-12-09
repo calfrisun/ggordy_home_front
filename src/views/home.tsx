@@ -7,6 +7,7 @@ import {get} from 'firebase/database';
 import {getFireDatabase} from '../utils/firebase.utils';
 import {ref} from 'firebase/database';
 import {cachePlz} from '../utils/cache.utils';
+import FloatButton from '../components/floatButton';
 
 const Home: Component = () => {
   const [imageList, setImageList] = createSignal<any[]>([]);
@@ -85,6 +86,7 @@ const Home: Component = () => {
             ))}
         </div>
       </div>
+      {/* <FloatButton /> */}
     </div>
   );
 };

@@ -22,7 +22,6 @@ render(() => {
     <>
       <Header />
       <Router>{routes}</Router>
-      {location.pathname === '/' && <FloatButton />}
     </>
   );
 }, root!);

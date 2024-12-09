@@ -9,16 +9,31 @@ import {
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
 import {getFirebaseApp} from '../utils/firebase.utils';
+import {useNavigate} from '@solidjs/router';
 
 const SnsLogin: Component = () => {
+  let ui;
+  const navigate = useNavigate();
+
   onMount(async () => {
+    const user = localStorage.getItem('USER_INFO');
+    if (user) {
+      navigate('/upload');
+      return;
+    }
+
     const app = await getFirebaseApp();
     const auth = getAuth(app);
     auth.languageCode = 'ko';
 
     // FirebaseUI 초기화 및 렌더링
-    const ui = new firebaseui.auth.AuthUI(auth);
-    // ui.start('#firebaseui-auth-container', uiConfig);
+    try {
+      ui =
+        firebaseui.auth.AuthUI.getInstance() ||
+        new firebaseui.auth.AuthUI(auth);
+    } catch (error) {
+      ui = new firebaseui.auth.AuthUI(auth);
+    }
 
     ui.start('#firebaseui-auth-container', {
       signInFlow: 'popup',

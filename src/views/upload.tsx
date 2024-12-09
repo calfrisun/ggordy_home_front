@@ -135,6 +135,10 @@ const Upload: Component = () => {
 
   onMount(async () => {
     const user = localStorage.getItem('USER_INFO');
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     const decodedUser = atob(user as string);
     const juser = decodeURIComponent(decodedUser);
     if (!juser && typeof juser !== 'string') {
