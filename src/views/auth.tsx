@@ -17,6 +17,7 @@ const Auth: Component = () => {
     const enjuser = encodeURIComponent(juser);
     const encodedUser = btoa(enjuser);
     localStorage.setItem('USER_INFO', encodedUser);
+    localStorage.setItem('USER_OBJ', juser);
     navigate('/');
 
     // btoa()는 Latin1 범위 밖의 문자를 처리할 수 없으므로

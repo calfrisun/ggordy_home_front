@@ -52,7 +52,15 @@ const Upload: Component = () => {
     reader.readAsDataURL(file);
   };
 
+  // 업로드 버튼 클릭 시 실행
   const handleUpload = () => {
+    if (!userInfo) {
+      window.alert('회원이 아닙니다.');
+      localStorage.removeItem('USER_INFO');
+      navigate('/login');
+      return;
+    }
+
     if (uploading()) {
       window.alert('업로드중입니다.');
       return;
