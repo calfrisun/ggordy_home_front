@@ -37,8 +37,56 @@ body::-webkit-scrollbar {
 //         @include transition(opacity, 0.3s, ease-in-out);
 //     }
 // }
+
 .home {
+    .sort-container {
+        max-width: 768px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin: 0 auto;
+
+        @include mobile {
+            width: calc(100% - 20px);
+        }
+
+        select {
+            position: relative;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            cursor: pointer;
+            outline: none;
+            margin: 2rem 0;
+
+            @include mobile {
+                margin: 0 0 1rem 0;
+            }
+
+            &:hover {
+                border-color: #999;
+            }
+
+            &:focus {
+                border-color: #666;
+                box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+            }
+
+            option {
+                padding: 8px;
+                background-color: white;
+                color: #333;
+
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+        }
+    }
     .container {
+        max-width: 768px;
         column-count: 3;
         column-gap: 10px;
         width: calc(100% - 20px);
@@ -53,6 +101,12 @@ body::-webkit-scrollbar {
                 width: 100%;
                 height: auto;
                 object-fit: cover;
+                opacity: 0;
+                @include transition(opacity, 0.3s, ease-in-out);
+
+                &.loaded {
+                    opacity: 1;
+                }
             }
         }
     }

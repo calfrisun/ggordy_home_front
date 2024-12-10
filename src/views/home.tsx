@@ -5,22 +5,16 @@ import {
   onCleanup,
   onMount,
 } from 'solid-js';
-import ImageFrame from '../components/imageFrame';
-import ImageFrameList from '../components/ImageFrameList';
-const imageSrc: string = './assets/images/ggordy.jpg';
-import Masonry from 'masonry-layout';
 import {get} from 'firebase/database';
 import {getFireDatabase} from '../utils/firebase.utils';
 import {ref} from 'firebase/database';
-import {cachePlz} from '../utils/cache.utils';
-import FloatButton from '../components/floatButton';
 
 const Home: Component = () => {
   const [imageList, setImageList] = createSignal<any[]>([]);
 
-  let container!: HTMLDivElement;
-  let masonry: Masonry | undefined;
-  const [masonryLoaded, setMasonryLoaded] = createSignal<boolean>(false);
+  const [sortType, setSortType] = createSignal<'TIME' | 'USER' | 'RANDOM'>(
+    'TIME'
+  );
 
   // 데이터베이스에서 포스트 정보 조회 함수
   const getPostFromDatabase = async (limit: number = 20) => {
@@ -34,8 +28,21 @@ const Home: Component = () => {
         // 객체를 배열로 변환하고 최신순으로 정렬
         const postsArray = Object.entries(posts)
           .map(([key, value]) => ({id: key, ...(value as object)}))
-          .sort((a: any, b: any) => b.uploadTime.localeCompare(a.uploadTime))
-          .slice(0, limit); // limit 개수만큼 자르기
+          .sort((a: any, b: any) => {
+            switch (sortType()) {
+              case 'USER':
+                return a.userEmail.localeCompare(b.userEmail);
+              case 'RANDOM':
+                return Math.random() - 0.5;
+              case 'TIME':
+              default:
+                // uploadTime을 기준으로 내림차순 정렬
+                return (
+                  new Date(b.uploadTime).getTime() -
+                  new Date(a.uploadTime).getTime()
+                );
+            }
+          });
 
         console.log('포스트 조회 성공:', postsArray);
         setImageList(postsArray);
@@ -50,60 +57,33 @@ const Home: Component = () => {
     }
   };
 
-  const eventHandler = () => {
-    setMasonryLoaded(true);
-  };
-
-  createEffect(() => {
-    // console.log(imageList());
-    if (imageList().length > 0) {
-      cachePlz(imageList()).then(count => {
-        masonry = new Masonry(container, {
-          itemSelector: '.masonry-item',
-          columnWidth: '.masonry-item',
-          percentPosition: true,
-          gutter: 10,
-        });
-        // @ts-ignore
-        masonry.on('layoutComplete', eventHandler);
-
-        //@ts-ignore
-        masonry!.layout();
-      });
+  const selectHandler = (e: Event) => {
+    if (e.target instanceof HTMLSelectElement) {
+      setSortType(e.target.value as 'TIME' | 'USER' | 'RANDOM');
+      getPostFromDatabase();
     }
-  });
+  };
 
   onMount(() => {
     getPostFromDatabase();
   });
 
   onCleanup(() => {
-    if (masonry) {
-      // @ts-ignore
-      masonry.off('layoutComplete', eventHandler);
-    }
+    // if (masonry) {
+    // @ts-ignore
+    // masonry.off('layoutComplete', eventHandler);
+    // }
   });
 
   return (
     <div class="home">
-      {/* <div class={masonryLoaded() ? '' : 'disappear'}>
-        <div class="masonry-container" ref={container}>
-          {imageList().length > 0 &&
-            imageList().map(item => (
-              <div class="masonry-item">
-                <img
-                  src={
-                    'https://static.ggordy.site/' +
-                    item.key +
-                    '.' +
-                    item.mimeType
-                  }
-                  alt="꼬디"
-                />
-              </div>
-            ))}
-        </div>
-      </div> */}
+      <div class="sort-container">
+        <select value={sortType()} onChange={selectHandler}>
+          <option value="TIME">최신순</option>
+          <option value="USER">유저순</option>
+          <option value="RANDOM">랜덤순</option>
+        </select>
+      </div>
       <div class="container">
         {imageList().length > 0 &&
           imageList().map(item => (
@@ -113,6 +93,12 @@ const Home: Component = () => {
                   'https://static.ggordy.site/' + item.key + '.' + item.mimeType
                 }
                 alt="꼬디"
+                loading="lazy"
+                onLoad={async e => {
+                  if (e.target instanceof HTMLImageElement) {
+                    e.target.classList.add('loaded');
+                  }
+                }}
               />
             </div>
           ))}

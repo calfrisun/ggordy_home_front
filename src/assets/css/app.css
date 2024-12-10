@@ -15,6 +15,12 @@ html {
   max-width: 768px;
   margin: 0 auto;
 }
+@media screen and (max-width: 375px) {
+  .header {
+    height: 40px;
+    margin-top: 0.5rem;
+  }
+}
 .header h1 {
   font-size: 6rem;
   font-family: "Ownglyph_jiwoosonang";
@@ -51,7 +57,51 @@ body::-webkit-scrollbar {
   display: none; /* 스크롤바 숨기기 */
 }
 
+.home .sort-container {
+  max-width: 768px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 auto;
+}
+@media screen and (max-width: 375px) {
+  .home .sort-container {
+    width: calc(100% - 20px);
+  }
+}
+.home .sort-container select {
+  position: relative;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+  outline: none;
+  margin: 2rem 0;
+}
+@media screen and (max-width: 375px) {
+  .home .sort-container select {
+    margin: 0 0 1rem 0;
+  }
+}
+.home .sort-container select:hover {
+  border-color: #999;
+}
+.home .sort-container select:focus {
+  border-color: #666;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+.home .sort-container select option {
+  padding: 8px;
+  background-color: white;
+  color: #333;
+}
+.home .sort-container select option:hover {
+  background-color: #f5f5f5;
+}
 .home .container {
+  max-width: 768px;
   column-count: 3;
   column-gap: 10px;
   width: calc(100% - 20px);
@@ -66,6 +116,15 @@ body::-webkit-scrollbar {
   width: 100%;
   height: auto;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+}
+.home .container .item > img.loaded {
+  opacity: 1;
 }
 
 .grid-container {
@@ -189,8 +248,7 @@ body::-webkit-scrollbar {
 .upload-container {
   width: 100%;
   max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+  margin: 2rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -256,6 +314,25 @@ body::-webkit-scrollbar {
 }
 .upload-container .upload-form .uploading-message {
   color: #000000;
+  font-size: 14px;
+}
+.upload-container .footer {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+.upload-container .footer > a {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: #000000;
+}
+.upload-container .footer > a img {
+  width: 24px;
+  height: 24px;
+}
+.upload-container .footer > a span {
   font-size: 14px;
 }
 

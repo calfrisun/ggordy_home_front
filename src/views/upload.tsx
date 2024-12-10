@@ -196,6 +196,12 @@ const Upload: Component = () => {
           업로드
         </button>
       </div>
+      <div class="footer">
+        <a href="https://github.com/calfrisun/ggordy_home_front">
+          <span>기능 추가는 셀프</span>
+          <img src="/assets/images/icon/github.png" alt="꼬디" />
+        </a>
+      </div>
     </div>
   );
 };
