@@ -51,39 +51,21 @@ body::-webkit-scrollbar {
   display: none; /* 스크롤바 숨기기 */
 }
 
-.home {
-  max-width: 768px;
+.home .container {
+  column-count: 3;
+  column-gap: 10px;
+  width: calc(100% - 20px);
   margin: 0 auto;
 }
-.home .masonry-container {
-  display: flex;
-  margin-left: 10px;
+.home .container .item {
+  break-inside: avoid;
   width: 100%;
+  margin-bottom: 16px;
 }
-.home .masonry-item {
-  margin-bottom: 10px;
-  width: calc(33% - 10px);
-}
-.home .masonry-item img {
-  display: block;
+.home .container .item > img {
   width: 100%;
   height: auto;
-}
-.home .disappear {
-  opacity: 0;
-  height: 0px;
-  transition: opacity 0.3s ease-in-out;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  -moz-transition: opacity 0.3s ease-in-out;
-  -ms-transition: opacity 0.3s ease-in-out;
-  -o-transition: opacity 0.3s ease-in-out;
-}
-.home > div {
-  transition: opacity 0.3s ease-in-out;
-  -webkit-transition: opacity 0.3s ease-in-out;
-  -moz-transition: opacity 0.3s ease-in-out;
-  -ms-transition: opacity 0.3s ease-in-out;
-  -o-transition: opacity 0.3s ease-in-out;
+  object-fit: cover;
 }
 
 .grid-container {

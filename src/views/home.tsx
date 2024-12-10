@@ -86,7 +86,7 @@ const Home: Component = () => {
 
   return (
     <div class="home">
-      <div class={masonryLoaded() ? '' : 'disappear'}>
+      {/* <div class={masonryLoaded() ? '' : 'disappear'}>
         <div class="masonry-container" ref={container}>
           {imageList().length > 0 &&
             imageList().map(item => (
@@ -103,6 +103,19 @@ const Home: Component = () => {
               </div>
             ))}
         </div>
+      </div> */}
+      <div class="container">
+        {imageList().length > 0 &&
+          imageList().map(item => (
+            <div class="item">
+              <img
+                src={
+                  'https://static.ggordy.site/' + item.key + '.' + item.mimeType
+                }
+                alt="꼬디"
+              />
+            </div>
+          ))}
       </div>
       {/* <FloatButton /> */}
     </div>

@@ -96,8 +96,10 @@ const Upload: Component = () => {
         );
 
         if (!response.ok) {
+          console.log('response', response);
           setUploading(false);
-          throw new Error('업로드에 실패했습니다.');
+          setError('파일 업로드 중 오류가 발생했습니다.');
+          return;
         }
 
         const result = await response.json();
